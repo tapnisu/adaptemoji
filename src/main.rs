@@ -5,13 +5,19 @@ fn main() {
     let cli = Cli::parse();
     let mut cmd = Cli::command();
 
-    let mut img = image::open(cli.input)
-        .unwrap_or_else(|err| cmd.error(ErrorKind::InvalidValue, err).exit())
-        .to_luma_alpha8();
+    let img =
+        image::open(cli.input).unwrap_or_else(|err| cmd.error(ErrorKind::InvalidValue, err).exit());
 
-    adaptemoji::convert(&mut img, cli.negative);
+    let mut gray_img = if cli.resize {
+        img.resize_to_fill(100, 100, image::imageops::FilterType::Triangle)
+    } else {
+        img
+    }
+    .to_luma_alpha8();
 
-    if let Err(err) = img.save(cli.output) {
+    adaptemoji::convert(&mut gray_img, cli.negative);
+
+    if let Err(err) = gray_img.save(cli.output) {
         cmd.error(ErrorKind::Io, err).exit()
     }
 }
