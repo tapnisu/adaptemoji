@@ -5,6 +5,8 @@ pub fn convert(img: &mut image::GrayAlphaImage, negative: bool) {
         for x in 0..img.width() {
             let pixel = img.get_pixel(x, y);
 
+            // For Telegram's adaptive emojis, it doesn't matter, made to better show what should you use depending on background
+            let new_color = if negative { 0 } else { 255 };
             let new_alpha = (((if negative {
                 255 - pixel.0[0]
             } else {
@@ -13,7 +15,7 @@ pub fn convert(img: &mut image::GrayAlphaImage, negative: bool) {
                 / 255f32)
                 * pixel.0[1] as f32) as u8;
 
-            let proc_pixel = image::LumaA::from([255, new_alpha]);
+            let proc_pixel = image::LumaA::from([new_color, new_alpha]);
             img.put_pixel(x, y, proc_pixel);
         }
     }
