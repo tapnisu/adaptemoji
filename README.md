@@ -67,7 +67,7 @@ use std::error;
 fn main() -> Result<(), Box<dyn error::Error>> {
     let img = image::open("./assets/examples/original.webp")?;
     let mut resized_img = img
-        .resize_to_fill(100, 100, image::imageops::FilterType::Triangle) // Resize image to 100px x 100px
+        .resize(100, 100, image::imageops::FilterType::Triangle) // Resize image to 100px x 100px
         .to_luma_alpha8();
 
     resized_img.convert_adaptive(false).save("./target/adaptive.png")?;
@@ -83,7 +83,7 @@ use std::error;
 fn main() -> Result<(), Box<dyn error::Error>> {
     let img = image::open("./assets/examples/original.webp")?;
     let mut resized_img = img
-        .resize_to_fill(100, 100, image::imageops::FilterType::Triangle) // Resize image to 100px x 100px
+        .resize(100, 100, image::imageops::FilterType::Triangle) // Resize image to 100px x 100px
         .to_luma_alpha8();
 
     adaptemoji::convert_adaptive(&mut resized_img, true);

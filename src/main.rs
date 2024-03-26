@@ -9,7 +9,7 @@ fn main() {
         image::open(cli.input).unwrap_or_else(|err| cmd.error(ErrorKind::InvalidValue, err).exit());
 
     let mut gray_img = if cli.resize {
-        img.resize_to_fill(100, 100, image::imageops::FilterType::Triangle)
+        img.resize(100, 100, image::imageops::FilterType::Triangle)
     } else {
         img
     }
