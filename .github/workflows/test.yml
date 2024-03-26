@@ -1,0 +1,31 @@
+name: Test
+
+on: push
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      # Don't forget to update `Cargo.toml`
+      - name: Setup rust 1.74.0
+        run: rustup toolchain install 1.74.0 --profile minimal --no-self-update
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --verbose
+      - name: Build without rayon
+        run: cargo build --no-default-features -F cli
+      - name: Run tests
+        run: cargo test --verbose
+      - name: Clippy
+        run: cargo clippy --verbose
+      - name: Clippy without rayon
+        run: cargo clippy --no-default-features -F cli --verbose
