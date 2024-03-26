@@ -1,3 +1,5 @@
+//! Utils for adaptemoji CLI
+
 use clap::Parser;
 use std::path::PathBuf;
 

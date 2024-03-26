@@ -56,7 +56,7 @@
 //!         .resize_to_fill(100, 100, image::imageops::FilterType::Triangle)
 //!         .to_luma_alpha8();
 //!
-//!     resized_img.convert(false).save("./target/adaptive.png")?;
+//!     resized_img.convert_adaptive(false).save("./target/adaptive.png")?;
 //!
 //!     Ok(())
 //! }
@@ -72,7 +72,7 @@
 //!         .resize_to_fill(100, 100, image::imageops::FilterType::Triangle)
 //!         .to_luma_alpha8();
 //!
-//!     adaptemoji::convert(&mut resized_img, true);
+//!     adaptemoji::convert_adaptive(&mut resized_img, true);
 //!     resized_img.save("./target/adaptive_negative.png")?;
 //!
 //!     Ok(())
@@ -98,11 +98,11 @@ pub mod cli;
 /// # fn main() -> Result<(), image::ImageError> {
 /// let mut img = image::open("./assets/examples/original.webp")?.to_luma_alpha8();
 ///
-/// adaptemoji::convert(&mut img, true);
+/// adaptemoji::convert_adaptive(&mut img, true);
 /// # Ok(())
 /// # }
 /// ```
-pub fn convert(img: &mut image::GrayAlphaImage, negative: bool) {
+pub fn convert_adaptive(img: &mut image::GrayAlphaImage, negative: bool) {
     for y in 0..img.height() {
         for x in 0..img.width() {
             let pixel = img.get_pixel(x, y);
@@ -144,17 +144,17 @@ pub trait AdaptiveEmojiConvert {
     /// # fn main() -> Result<(), image::ImageError> {
     /// let mut img = image::open("./assets/examples/original.webp")?.to_luma_alpha8();
     ///
-    /// let adaptive_img = img.convert(true);
+    /// let adaptive_img = img.convert_adaptive(true);
     /// # Ok(())
     /// # }
     /// ```
-    fn convert(&self, negative: bool) -> Self;
+    fn convert_adaptive(&self, negative: bool) -> Self;
 }
 
 impl AdaptiveEmojiConvert for image::GrayAlphaImage {
-    fn convert(&self, negative: bool) -> image::GrayAlphaImage {
+    fn convert_adaptive(&self, negative: bool) -> image::GrayAlphaImage {
         let mut img = self.clone();
-        convert(&mut img, negative);
+        convert_adaptive(&mut img, negative);
         img
     }
 }

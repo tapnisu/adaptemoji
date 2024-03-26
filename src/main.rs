@@ -15,7 +15,7 @@ fn main() {
     }
     .to_luma_alpha8();
 
-    adaptemoji::convert(&mut gray_img, cli.negative);
+    adaptemoji::convert_adaptive(&mut gray_img, cli.negative);
 
     if let Err(err) = gray_img.save(cli.output) {
         cmd.error(ErrorKind::Io, err).exit()

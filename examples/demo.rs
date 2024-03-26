@@ -7,9 +7,9 @@ fn main() -> Result<(), Box<dyn error::Error>> {
         .resize_to_fill(100, 100, image::imageops::FilterType::Triangle)
         .to_luma_alpha8();
 
-    resized_img.convert(false).save("./target/adaptive.png")?;
+    resized_img.convert_adaptive(false).save("./target/adaptive.png")?;
 
-    adaptemoji::convert(&mut resized_img, true);
+    adaptemoji::convert_adaptive(&mut resized_img, true);
     resized_img.save("./target/adaptive_negative.png")?;
 
     Ok(())
