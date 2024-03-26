@@ -12,7 +12,11 @@ pub struct Cli {
     #[clap(short, long)]
     pub output: PathBuf,
 
-    /// Invert image
+    /// Resize image to 100x100
+    #[clap(short, long, action)]
+    pub resize: bool,
+
+    /// Invert image for better look on dark backgrounds
     #[clap(short, long, action)]
     pub negative: bool,
 }
