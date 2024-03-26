@@ -1,5 +1,26 @@
 pub mod cli;
 
+/// Converts the pixels of a GrayAlphaImage to negative if `negative` is true,
+/// otherwise, converts them to positive.
+///
+/// For Telegram's adaptive emojis, it doesn't matter, made to better show
+/// what should you use depending on the background.
+///
+/// # Arguments
+///
+/// * `img` - A mutable reference to a GrayAlphaImage.
+/// * `negative` - A boolean indicating whether to convert to negative or not.
+///
+/// # Examples
+///
+/// ```
+/// # fn main() -> Result<(), image::ImageError> {
+/// let mut img = image::open("./assets/examples/original.webp")?.to_luma_alpha8();
+///
+/// adaptemoji::convert(&mut img, true);
+/// # Ok(())
+/// # }
+/// ```
 pub fn convert(img: &mut image::GrayAlphaImage, negative: bool) {
     for y in 0..img.height() {
         for x in 0..img.width() {
