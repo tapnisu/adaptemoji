@@ -79,6 +79,7 @@
 //! }
 //! ```
 
+#[cfg(feature = "cli")]
 pub mod cli;
 
 /// Converts the pixels of a GrayAlphaImage to negative if `negative` is true,
