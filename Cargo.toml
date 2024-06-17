@@ -12,8 +12,8 @@ license = "MIT"
 rust-version = "1.74"
 
 documentation = "https://docs.rs/adaptemoji"
-repository = "https://github.com/adaptemoji/adaptemoji"
-homepage = "https://github.com/adaptemoji/adaptemoji"
+repository = "https://github.com/tapnisu/adaptemoji"
+homepage = "https://github.com/tapnisu/adaptemoji"
 categories = [
     "command-line-utilities",
     "multimedia",

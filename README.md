@@ -15,6 +15,8 @@ As you can see, one of the adaptive versions looks wrong compared to original. B
 1. CC linker (Windows - Microsoft Visual Studio with C++ Support) (Linux - gcc)
 
 2. [Rust](https://www.rust-lang.org/tools/install)
+   > **Important**:
+   > Current minimal Rust version is 1.74!
 
 ## Installation
 
